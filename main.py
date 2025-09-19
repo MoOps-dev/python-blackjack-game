@@ -18,7 +18,7 @@ player_hand = []
 computer_hand = []
 
 scores = [0, 0]
-balance = [1000]
+balance = [300]
 d_amount = [0]
 
 def draw_card(players, cards):
@@ -50,13 +50,16 @@ def clear():
 
 def new_round():
     d_amount[0] = 0
-    ask = input("If you'd like to start a new turn enter your deal amount or press 'Enter' to end game: ").lower()
-    if ask != '':
-        if int(ask) > 0:
-            d_amount[0] += int(ask)
-            deal_cards()
+    if balance[0] < 10:
+        input("You don't have enough balance to play again, press 'ENTER' to exit ")
     else:
-        return
+        ask = input("If you'd like to start a new turn enter your deal amount or press 'Enter' to end game: ").lower()
+        if ask != '':
+            if int(ask) > 0:
+                d_amount[0] += int(ask)
+                deal_cards()
+        else:
+            return
 
 def start_game():
     print(logo)
@@ -253,4 +256,3 @@ def compare_hands():
         result(0, "Push")
 
 start_game()
-# TODO: Game Over when balance reaches 0
